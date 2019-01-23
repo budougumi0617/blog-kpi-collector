@@ -1,0 +1,32 @@
+{
+  "name": "blog-kpi-collector",
+  "version": "1.0.0",
+  "description": "Collect KPIs for blog",
+  "main": "index.js",
+  "dependencies": {
+    "@google/clasp": "^2.0.1",
+    "@types/google-apps-script": "0.0.35",
+    "@types/google.analytics": "0.0.39",
+    "@types/node": "^10.12.18",
+    "tslint": "^5.12.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.1",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-plugin-prettier": "^2.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/budougumi0617/blog-kpi-collector.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/budougumi0617/blog-kpi-collector/issues"
+  },
+  "homepage": "https://github.com/budougumi0617/blog-kpi-collector#readme"
+}
