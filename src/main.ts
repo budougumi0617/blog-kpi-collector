@@ -59,6 +59,17 @@ function main() {
     console.log("はてなブックーマーク数は取得しませんでした");
   }
 
-  console.log([today, followers, pv, bounceRate, bookmarks]);
-  sheet.appendRow([today, followers, pv, bounceRate, bookmarks]);
+  // 「指定した url のブログ」に対する読者数を取得する
+  // BLOG_URLには自分のサイトのURLを入力しておくこと。
+  // 例: https://budougumi0617.github.io/
+  let numOfSubscribers = -1;
+  const url = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
+  if (url != null) {
+    numOfSubscribers = getNumOfSubscribers(url);
+  } else {
+    console.log("読者数は取得しませんでした");
+  }
+
+  console.log([today, followers, pv, bounceRate, bookmarks, numOfSubscribers]);
+  sheet.appendRow([today, followers, pv, bounceRate, bookmarks, numOfSubscribers]);
 }
