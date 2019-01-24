@@ -1,10 +1,15 @@
 # blog-kpi-collector
 Collect KPIs for blog
 
-このリポジトリからApps Scriptとスプレットシートを作成すると、以下のKPI情報をシートに書き込んでいきます。未設定にしておけば取得もしないので、全てサービスからの情報が不要な方でも利用できます。
+Googleスプレットシートで定期的にブログの情報を集計するためのApps Scriptを生成するスターターキットです。
+
+![完成図](./img/result.png)
+
+このリポジトリを使ってApps Scriptとスプレットシートを作成すると、以下のKPI情報をシートに書き込んでいきます。  
+未設定にしておけば取得もしないので、全てサービスからの情報が不要な方でも利用できます。 
+後述するトリガーを設定しておくことで定期的にデータを集計できます。 
 
 ```
-取得元
 Twitter | フォロワー数
 Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
 はてなブックマーク | はてなブックマーク総数
@@ -12,7 +17,7 @@ Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
 
 # 使い方
 # 初期設定
-`clasp`コマンドを利用する準備をします。以下のページを参考に`clasp login`まで済ませておきます。
+自分のPCで`clasp`コマンドを利用する準備をします。以下のページを参考に`clasp login`まで済ませておきます。
 
 - GAS のGoogle謹製CLIツール clasp
     - https://qiita.com/HeRo/items/4e65dcc82783b2766c03
@@ -103,8 +108,8 @@ Google Analyticsとの連携には`GA_VIEW_ID`の他にAnalytics APIを有効に
 3. `Set the query parameters`の`ids`に自動入力される`ga:000000000`というIDをGA_VIEW_IDとする
 
 
-## APIを有効にする
-1. Add-on スクリプトのメニューから「リソース」→「Google の拡張サービス」を選択し、Google Analytics APIを有効にします。
+## Analytics APIを有効にする
+1. Add-on scriptのメニューから「リソース」→「Google の拡張サービス」を選択し、Google Analytics APIを有効にします。
 
 
 ![拡張サービス](./img/expansion_services.png)
@@ -114,11 +119,11 @@ Google Analyticsとの連携には`GA_VIEW_ID`の他にAnalytics APIを有効に
 3. APIを有効にするボタンをクリックして「Analitycs API」を探し、有効にします。
 ![APIとサービスを有効にする](./img/open_api_project.png)
 ![Analytics APIを有効にする](./img/analitics_api.png)
-4. もう一度Add-on スクリプトに戻り`main`関数を実行すると、最初に出てきた認可ウインドウが表示されるので、最初と同じように「許可」をします。
+4. もう一度Add-on scriptに戻り`main`関数を実行すると、最初に出てきた認可ウインドウが表示されるので、最初と同じように「許可」をします。
 
 
 # 定期的に実行する（トリガーを設定する）
-Add-on スクリプトの時計のアイコンからトリガーを設定することができます。
+Add-on scriptの時計のアイコンからトリガーを設定することができます。
 メニューの中の「編集」→「現在のプロジェクトのトリガー」から定期的に`main`関数を実行するようにします。
 ![トリガーを設定して定期的に実行する](./img/trigger.png)
 ## トリガーが時間どおりに動かない場合
