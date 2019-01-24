@@ -52,9 +52,9 @@ function main() {
   // BLOG_URLには自分のサイトのURLを入力しておくこと。
   // 例: https://budougumi0617.github.io/
   let bookmarks = -1;
-  const url = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
-  if (url != null) {
-    bookmarks = getBookmarcCount(url);
+  const blogUrl = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
+  if (blogUrl != null) {
+    bookmarks = getBookmarcCount(blogUrl);
   } else {
     console.log("はてなブックーマーク数は取得しませんでした");
   }
@@ -63,9 +63,8 @@ function main() {
   // BLOG_URLには自分のサイトのURLを入力しておくこと。
   // 例: https://budougumi0617.github.io/
   let numOfSubscribers = -1;
-  const url = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
-  if (url != null) {
-    numOfSubscribers = getNumOfSubscribers(url);
+  if (blogUrl != null) {
+    numOfSubscribers = getNumOfSubscribers(blogUrl);
   } else {
     console.log("読者数は取得しませんでした");
   }
