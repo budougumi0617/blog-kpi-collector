@@ -22,11 +22,13 @@ Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
 - GAS のGoogle謹製CLIツール clasp
     - https://qiita.com/HeRo/items/4e65dcc82783b2766c03
 
-このリポジトリをローカルに持ってきます。
+このリポジトリをローカルに持ってきて、パッケージ群をインストールします。
 
 ```bash
 git clone git@github.com:budougumi0617/blog-kpi-collector.git
 cd blog-kpi-collector
+
+npm install
 ```
 
 
