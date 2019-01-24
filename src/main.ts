@@ -63,7 +63,8 @@ function main() {
   // BLOG_URLには自分のサイトのURLを入力しておくこと。
   // 例: https://budougumi0617.github.io/
   let numOfSubscribers = -1;
-  if (blogUrl != null) {
+  const hatenaBlog = PropertiesService.getScriptProperties().getProperty("HATENA_BLOG");
+  if (hatenaBlog === "true") {
     numOfSubscribers = getNumOfSubscribers(blogUrl);
   } else {
     console.log("読者数は取得しませんでした");
