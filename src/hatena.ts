@@ -1,4 +1,4 @@
-function getBookmarcCount(target) {
+function getBookmarkCount(target) {
   // http://developer.hatena.ne.jp/ja/documents/bookmark/apis/getcount
   const url = `http://api.b.st-hatena.com/entry.total_count?url=${target}`;
   const response = UrlFetchApp.fetch(url);

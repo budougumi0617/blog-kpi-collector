@@ -54,7 +54,7 @@ function main() {
   let bookmarks = -1;
   const blogUrl = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
   if (blogUrl != null) {
-    bookmarks = getBookmarcCount(blogUrl);
+    bookmarks = getBookmarkCount(blogUrl);
   } else {
     console.log("はてなブックーマーク数は取得しませんでした");
   }
