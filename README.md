@@ -1,13 +1,14 @@
 # blog-kpi-collector
 Collect KPIs for blog
 
-このリポジトリからApps Scriptとスプレットシートを作成すると、以下のKPI情報をシートに書き込んでいきます。未設定にしておけば取得もしないので、全ての情報が不要な方でも利用できます。
+このリポジトリからApps Scriptとスプレットシートを作成すると、以下のKPI情報をシートに書き込んでいきます。未設定にしておけば取得もしないので、全てサービスからの情報が不要な方でも利用できます。
 
-
-取得元 | Twitter | Google Analytics | Google Analytics | はてなブックマーク
-|---|---|---|---|---|---|
-書き込む情報 | 実行時の日付 | フォロワー数 | 前日までの週間PV数 | 前日までの週間直帰率 | はてなブックマーク総数
-
+```
+取得元
+Twitter | フォロワー数
+Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
+はてなブックマーク | はてなブックマーク総数
+```
 
 # 使い方
 # 初期設定
@@ -17,6 +18,11 @@ Collect KPIs for blog
     - https://qiita.com/HeRo/items/4e65dcc82783b2766c03
 
 このリポジトリをローカルに持ってきます。
+
+```bash
+git clone git@github.com:budougumi0617/blog-kpi-collector.git
+cd blog-kpi-collector
+```
 
 
 `clasp create`コマンドでAdd-on script（Apps Scriptプロジェクト）と紐付けるスプレットシートを作成します。
@@ -51,12 +57,18 @@ Pushed 6 files.
 Add-on scriptのURLを開きます(`clasp open`コマンドでも開きます)。
 `main.gs`ファイルを選択し、`main`関数を実行します。
 
+![main関数を実行する](./img/execute_main.png)
+
 「承認が必要です」と出てくるので「許可を確認」→アカウントを選択→「詳細」→「KPI Sheet（安全ではないページ）に移動」→「許可」とクリックしていきます。
 
 実行後、スプレットシートを開き、以下の状態になっていたら初期設定は終了です。
+![実行後のSheetの状態](./img/executed_result.png)
 
 スクリプトのプロパティにアカウントIDなどを入力すれば実行のたびに最後の行に新しい情報が追加されていきます。
 （必要に応じて最初の行に列情報を書いておくといいでしょう）
+
+![行タイトルをつけておく](./img/rows_labels.png)
+
 
 ## 「スクリプトのプロパティ」を設定する
 Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、スクリプトのプロパティに以下の変数を設定します。
@@ -74,12 +86,13 @@ Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、�
 1. このリポジトリで作成したApps Scriptのプロジェクトを開く
   - https://script.google.com/u/1/home
 2. メニューの中の「ファイル」→「プロジェクトのプロパティ」をクリックする
+![プロパティを設定する](./img/open_project_properties.png)
 3. 「プロジェクトのプロパティ」ウインドウの「スクリプトのプロパティ」タブをクリックする
 4. 設定するプロパティの名前と値を入力していく
-
+![スクリプトのプロパティ](./img/properties.png)
 
 # Google Analyticsとの連携方法
-Google Analyticsとの連携には`GA_VIEW_ID`の他にAPIを有効にする必要があります。
+Google Analyticsとの連携には`GA_VIEW_ID`の他にAnalytics APIを有効にする必要があります。
 
 ## GA_VIEW_IDの調べ方
 まず、Google Analyticsの情報を取得するためのIDの取得方法は以下の通りです。
@@ -93,16 +106,26 @@ Google Analyticsとの連携には`GA_VIEW_ID`の他にAPIを有効にする必�
 ## APIを有効にする
 1. Add-on スクリプトのメニューから「リソース」→「Google の拡張サービス」を選択し、Google Analytics APIを有効にします。
 
+
+![拡張サービス](./img/expansion_services.png)
+![Add-on プロジェクト上でAPIを有効にする](./img/enable_statics_api.png)
+
 2. Google Cloud Platform API ダッシュボード へのリンクがあるのでクリックすると、別のウインドウが開きます。
 3. APIを有効にするボタンをクリックして「Analitycs API」を探し、有効にします。
-
+![APIとサービスを有効にする](./img/open_api_project.png)
+![Analytics APIを有効にする](./img/analitics_api.png)
 4. もう一度Add-on スクリプトに戻り`main`関数を実行すると、最初に出てきた認可ウインドウが表示されるので、最初と同じように「許可」をします。
 
 
 # 定期的に実行する（トリガーを設定する）
 Add-on スクリプトの時計のアイコンからトリガーを設定することができます。
 メニューの中の「編集」→「現在のプロジェクトのトリガー」から定期的に`main`関数を実行するようにします。
-
+![トリガーを設定して定期的に実行する](./img/trigger.png)
 ## トリガーが時間どおりに動かない場合
 タイムゾーンがずれているかもしれません。
 メニューの中の「ファイル」→「プロジェクトのプロパティ」をクリックし、「プロジェクトのプロパティ」ウインドウ内の「情報」タブの中に「タイムゾーン」の設定があるのでそちらを確認してください。
+
+# 要望など
+Issueでお願いします。
+
+https://github.com/budougumi0617/blog-kpi-collector/issues/new
