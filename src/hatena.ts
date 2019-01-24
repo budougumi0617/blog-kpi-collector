@@ -7,3 +7,17 @@ function getBookmarcCount(target) {
   const tb = "total_bookmarks";
   return resp[tb];
 }
+
+function getNumOfSubscribers(target) {
+  const url = `https://blog.hatena.ne.jp/api/init?blog=${target}`;
+  const headers={"X-Requested-With": "XMLHttpRequest"};
+  const options = {
+    "method" : "GET",
+    "headers" : headers,
+    "followRedirects" : false
+  };
+  const response = UrlFetchApp.fetch(url, options).getContentText("UTF-8");
+  const parsedResponse = JSON.parse(response);
+  const numOfSubscribers = parsedResponse["subscribes"];
+  return numOfSubscribers;
+}
