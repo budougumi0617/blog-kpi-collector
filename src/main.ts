@@ -64,7 +64,7 @@ function main() {
   // 例: https://budougumi0617.github.io/
   let numOfSubscribers = -1;
   const hatenaBlog = PropertiesService.getScriptProperties().getProperty("HATENA_BLOG");
-  if (hatenaBlog === "true") {
+  if (hatenaBlog === "true" && blogUrl != null) {
     numOfSubscribers = getNumOfSubscribers(blogUrl);
   } else {
     console.log("読者数は取得しませんでした");
