@@ -137,3 +137,9 @@ Add-on scriptの時計のアイコンからトリガーを設定することが�
 Issueでお願いします。
 
 https://github.com/budougumi0617/blog-kpi-collector/issues/new
+
+# 製作者
+@budougumi0617
+
+# ライセンス
+MIT
