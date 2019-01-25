@@ -56,12 +56,10 @@ function main() {
   if (blogUrl != null) {
     bookmarks = getBookmarkCount(blogUrl);
   } else {
-    console.log("はてなブックーマーク数は取得しませんでした");
+    console.log("はてなブックマーク数は取得しませんでした");
   }
 
-  // 「指定した url のブログ」に対する読者数を取得する
-  // BLOG_URLには自分のサイトのURLを入力しておくこと。
-  // 例: https://budougumi0617.github.io/
+  // 「HATENA_BLOGがtrue」だった場合、「指定した url のブログ」に対する読者数を取得する
   let numOfSubscribers = -1;
   const hatenaBlog = PropertiesService.getScriptProperties().getProperty("HATENA_BLOG");
   if (hatenaBlog === "true" && blogUrl != null) {
