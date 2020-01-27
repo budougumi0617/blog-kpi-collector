@@ -13,6 +13,8 @@ Googleスプレットシートで定期的にブログの情報を集計する�
 Twitter | フォロワー数
 Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
 はてなブックマーク | はてなブックマーク総数
+はてなブログ | はてなブログ読者総数
+はてなスター | はてなスター総数
 ```
 
 # 使い方
@@ -85,7 +87,7 @@ Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、�
 |---|---|---|---|
 | `SHEET_NAME` | 集計したいシートの名前 | 未設定の場合は「シート1」に集計する| master |
 | `TWITTER_NAME` | Twitter ID | フォロワー数を取得する | budougumi0617
-| `GA_VIEW_ID` | | GA ID | 一週間のPV数と直帰率を集計する | ga:000000000 |
+| `GA_VIEW_ID` | GA ID | 一週間のPV数と直帰率を集計する | ga:000000000 |
 | `BLOG_URL` | ブログのURL | はてなブックマーク数を取得する | https://budougumi0617.github.io/ |
 | `HATENA_BLOG` | true or another | `BLOG_URL`が設定済みであることがであることが前提。はてなブログ読者数を取得する、未設定もしくはtrue以外の設定は未入力と同じく値を取得しない | true |
 

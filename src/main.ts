@@ -59,15 +59,17 @@ function main() {
     console.log("はてなブックマーク数は取得しませんでした");
   }
 
-  // 「HATENA_BLOGがtrue」だった場合、「指定した url のブログ」に対する読者数を取得する
+  // 「HATENA_BLOGがtrue」だった場合、「指定した url のブログ」に対する読者数・スター数を取得する
   let numOfSubscribers = -1;
+  let stars = -1;
   const hatenaBlog = PropertiesService.getScriptProperties().getProperty("HATENA_BLOG");
   if (hatenaBlog === "true" && blogUrl != null) {
     numOfSubscribers = getNumOfSubscribers(blogUrl);
+    stars = getStarCount(blogUrl);
   } else {
-    console.log("読者数は取得しませんでした");
+    console.log("読者数・スター数は取得しませんでした");
   }
 
-  console.log([today, followers, pv, bounceRate, bookmarks, numOfSubscribers]);
-  sheet.appendRow([today, followers, pv, bounceRate, bookmarks, numOfSubscribers]);
+  console.log([today, followers, pv, bounceRate, bookmarks, numOfSubscribers, stars]);
+  sheet.appendRow([today, followers, pv, bounceRate, bookmarks, numOfSubscribers, stars]);
 }
