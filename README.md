@@ -89,7 +89,7 @@ Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、�
 | `TWITTER_NAME` | Twitter ID | フォロワー数を取得する | budougumi0617
 | `GA_VIEW_ID` | GA ID | 一週間のPV数と直帰率を集計する | ga:000000000 |
 | `BLOG_URL` | ブログのURL | はてなブックマーク数を取得する | https://budougumi0617.github.io/ |
-| `HATENA_BLOG` | true or another | `BLOG_URL`が設定済みであることがであることが前提。はてなブログ読者数を取得する、未設定もしくはtrue以外の設定は未入力と同じく値を取得しない | true |
+ | `HATENA_BLOG` | true or another | `BLOG_URL`が設定済みであることがであることが前提。はてなブログ読者数とはてなスター数を取得する、未設定もしくはtrue以外の設定は未入力と同じく値を取得しない | true |
 
 
 ## スクリプトのプロパティの設定方法
