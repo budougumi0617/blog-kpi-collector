@@ -60,5 +60,9 @@ typings/
 # next.js build output
 .next
 
+# General
+.DS_Store
+
 .clasp.json
 src/appsscript.json
+src/Code.js

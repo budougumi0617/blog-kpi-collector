@@ -21,3 +21,16 @@ function getNumOfSubscribers(target) {
   const numOfSubscribers = parsedResponse["subscribes"];
   return numOfSubscribers;
 }
+
+function getStarCount(target) {
+  // http://developer.hatena.ne.jp/ja/documents/star/apis/count
+  // '/'終わりでないURLの場合404エラーとなってしまうのを避ける
+  // String.prototype.endsWith()が利用できないのでsubstringで実装
+  const uri = target.substring(target.length - 1, target.length) === '/' ? target : target + '/';
+  const url = `https://s.hatena.ne.jp/blog.json?uri=${uri}`;
+  const response = UrlFetchApp.fetch(url);
+  const json = response.getContentText("UTF-8");
+  const resp = JSON.parse(json);
+  const starCount = resp['star_count'];
+  return starCount;
+}
