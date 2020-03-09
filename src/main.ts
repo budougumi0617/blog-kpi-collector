@@ -52,7 +52,9 @@ function main() {
   // BLOG_URLには自分のサイトのURLを入力しておくこと。
   // 例: https://budougumi0617.github.io/
   let bookmarks = -1;
-  const blogUrl = PropertiesService.getScriptProperties().getProperty("BLOG_URL");
+  const blogUrl = PropertiesService.getScriptProperties().getProperty(
+    "BLOG_URL"
+  );
   if (blogUrl != null) {
     bookmarks = getBookmarkCount(blogUrl);
   } else {
@@ -62,7 +64,9 @@ function main() {
   // 「HATENA_BLOGがtrue」だった場合、「指定した url のブログ」に対する読者数・スター数を取得する
   let numOfSubscribers = -1;
   let stars = -1;
-  const hatenaBlog = PropertiesService.getScriptProperties().getProperty("HATENA_BLOG");
+  const hatenaBlog = PropertiesService.getScriptProperties().getProperty(
+    "HATENA_BLOG"
+  );
   if (hatenaBlog === "true" && blogUrl != null) {
     numOfSubscribers = getNumOfSubscribers(blogUrl);
     stars = getStarCount(blogUrl);
@@ -70,6 +74,22 @@ function main() {
     console.log("読者数・スター数は取得しませんでした");
   }
 
-  console.log([today, followers, pv, bounceRate, bookmarks, numOfSubscribers, stars]);
-  sheet.appendRow([today, followers, pv, bounceRate, bookmarks, numOfSubscribers, stars]);
+  console.log([
+    today,
+    followers,
+    pv,
+    bounceRate,
+    bookmarks,
+    numOfSubscribers,
+    stars
+  ]);
+  sheet.appendRow([
+    today,
+    followers,
+    pv,
+    bounceRate,
+    bookmarks,
+    numOfSubscribers,
+    stars
+  ]);
 }
