@@ -56,8 +56,7 @@ function main() {
     "BLOG_URL"
   );
   if (blogUrl != null) {
-    // FIXME: APIが廃止されたので別手段で取得する必要がある。
-    bookmarks = -1; // getBookmarkCount(blogUrl);
+    bookmarks = getBookmarkCount(blogUrl);
   } else {
     console.log("はてなブックマーク数は取得しませんでした");
   }
