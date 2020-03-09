@@ -64,5 +64,6 @@ typings/
 .DS_Store
 
 .clasp.json
+.clasprc.json
 src/appsscript.json
-src/Code.js
+src/*.js
