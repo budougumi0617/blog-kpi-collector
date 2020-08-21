@@ -67,3 +67,5 @@ typings/
 .clasprc.json
 src/appsscript.json
 src/*.js
+
+creds.json

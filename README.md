@@ -126,6 +126,13 @@ Google Analyticsとの連携には`GA_VIEW_ID`の他にAnalytics APIを有効に
 ![Analytics APIを有効にする](./img/analitics_api.png)
 4. もう一度Add-on scriptに戻り`main`関数を実行すると、最初に出てきた認可ウインドウが表示されるので、最初と同じように「許可」をします。
 
+## ローカルで実行する
+`clasp run`コマンドで実行できます。別途認証情報などが必要になるので、以下のページを参考に追加の設定をしてください。
+
+- https://github.com/google/clasp/blob/master/docs/run.md
+- [Google Apps ScriptをローカルPCで開発する方法][localdev]
+
+[localdev]:https://officeforest.org/wp/2019/04/07/google-apps-script%E3%82%92%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%ABpc%E3%81%A7%E9%96%8B%E7%99%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/
 
 # 定期的に実行する（トリガーを設定する）
 Add-on scriptの時計のアイコンからトリガーを設定することができます。
