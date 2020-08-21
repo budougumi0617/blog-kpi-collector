@@ -1,13 +1,15 @@
+import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
+
 // https://yurilog.cc/3375
-function getTwitterFollowers(accoutName) {
+function getTwitterFollowers(accoutName: string) {
   const url = `https://twitter.com/${accoutName}`;
   const postheader = {
-    timeout: "50000"
+    timeout: "50000",
   };
-  const parameters = {
+  const parameters: URLFetchRequestOptions = {
     headers: postheader,
     method: "get",
-    muteHttpExceptions: true
+    muteHttpExceptions: true,
   };
   let html = UrlFetchApp.fetch(url, parameters).getContentText("UTF-8");
   const searchTag = "followers";
