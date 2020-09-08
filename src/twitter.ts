@@ -12,13 +12,15 @@ function getTwitterFollowers(accoutName: string): number {
   };
   let html: string = UrlFetchApp.fetch(url, parameters).getContentText("UTF-8");
   // curlで取得したHTMLの中から文字列を取得。その文字列をChrome Dev toolsでこねこねして考えた正規表現。
-  const counts = html.match(/\/followers\">[<>\w\s=/"]*statnum\">(\d+)<\/div>/);
+  const counts = html.match(
+    /\/followers\">[<>\w\s=/"]*statnum\">([\d,]+)<\/div>/
+  );
   if (counts === null) {
-    Logger.log("failed parse twitter");
+    Logger.log("cannot parse twitter follower");
     return -1;
   } else if (counts.length < 2) {
-    Logger.log("failed parse twitter %s", counts);
+    Logger.log("unexpected parse result on twitter %s", counts);
     return -1;
   }
-  return Number(counts[1]);
+  return Number(counts[1].replace(/,/g, ""));
 }
