@@ -57,6 +57,7 @@ $ clasp push
 └─ src/googleAnalytics.ts
 └─ src/hatena.ts
 └─ src/main.ts
+└─ src/slack.ts
 └─ src/twitter.ts
 Pushed 6 files.
 ```
@@ -90,6 +91,7 @@ Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、�
 | `GA_VIEW_ID` | GA ID | 一週間のPV数と直帰率を集計する | ga:000000000 |
 | `BLOG_URL` | ブログのURL | はてなブックマーク数を取得する | https://budougumi0617.github.io/ |
  | `HATENA_BLOG` | true or another | `BLOG_URL`が設定済みであることがであることが前提。はてなブログ読者数とはてなスター数を取得する、未設定もしくはtrue以外の設定は未入力と同じく値を取得しない | true |
+ | `SLACK_URL` | SlackのIncommingHook | Slackの通知先のIncommingHookを設定する | https://hooks.slack.com/services/TAH1RHKEW/B01BXA1PYBC/JQ5aIRrqTnAAAAAAAAAAAAA |
 
 
 ## スクリプトのプロパティの設定方法
@@ -141,6 +143,15 @@ Add-on scriptの時計のアイコンからトリガーを設定することが�
 ## トリガーが時間どおりに動かない場合
 タイムゾーンがずれているかもしれません。
 メニューの中の「ファイル」→「プロジェクトのプロパティ」をクリックし、「プロジェクトのプロパティ」ウインドウ内の「情報」タブの中に「タイムゾーン」の設定があるのでそちらを確認してください。
+
+# Slackに通知する
+通知先チャンネルを設定したIncommingHookを設定する。  
+https://my.slack.com/services/new/incoming-webhook/  
+  
+下記のWebhook URLを```SLACK_URL```に設定する。
+![SlackのwebHookUrlを取得する](./img/slack_webhookUrl.png)
+  
+なお、トリガーで深夜に起動する場合は、Slack側で深夜の通知が来ないようにする等の設定をしてください。
 
 # 更新する。
 最新のスクリプトを利用したい場合は、次のコマンドで実行できます。
