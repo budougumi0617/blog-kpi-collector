@@ -74,7 +74,8 @@ function main() {
     console.log("読者数・スター数は取得しませんでした");
   }
 
-  console.log([
+  // スプレッドシートに追記する
+  const appendData: Array<any> = [
     today,
     followers,
     pv,
@@ -82,14 +83,17 @@ function main() {
     bookmarks,
     numOfSubscribers,
     stars
-  ]);
-  sheet.appendRow([
-    today,
-    followers,
-    pv,
-    bounceRate,
-    bookmarks,
-    numOfSubscribers,
-    stars
-  ]);
+  ];
+  console.log(appendData);
+  sheet.appendRow(appendData);
+
+  // Slackへの通知を行う。 
+  const slackUrl = PropertiesService.getScriptProperties().getProperty(
+    "SLACK_URL"
+  );
+  if (slackUrl != null) {
+    slackNotification(slackUrl, appendData);
+  } else {
+    console.log('Slack通知URLは取得しませんでした');
+  }
 }
