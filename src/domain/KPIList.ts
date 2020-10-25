@@ -8,13 +8,13 @@ export class KPIList {
   }
 
   public getSpreadSheetArray(): Array<string> {
-    return this.kpiList.map(kpi => kpi.getValue);
+    return this.kpiList.map(kpi => kpi.getValue());
   }
 
   public getSlackArray(): any {
     return this.kpiList
-      .filter(kpi => (kpi.getValue === "-1"))
-      .map(kpi => kpi.toSlackFields);
+      .filter(kpi => kpi.getValue() !== "-1")
+      .map(kpi => kpi.toSlackFields());
   }
 }
 
@@ -45,4 +45,50 @@ export class KPIDate extends KPI {
   }
 }
 
-// TODO: いっぱい以下にデータを作る
+export class KPITwitterFollower extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("Twitter Follower", value);
+  }
+}
+
+export class KPIWeeklyPV extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("WeeklyPV", value);
+  }
+}
+
+export class KPIWeeklyBounceRate extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("Weekly Bounce Rate", value);
+  }
+}
+
+export class KPIBookmarks extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("Bookmarks", value);
+  }
+}
+
+export class KPISubscribers extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("Subscribers", value);
+  }
+}
+
+export class KPIStars extends KPI {
+  constructor(
+    value: string
+  ) {
+    super("Stars", value);
+  }
+}

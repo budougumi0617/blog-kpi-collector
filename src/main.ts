@@ -1,4 +1,4 @@
-import { KPIDate, KPIList } from './domain/KPIList';
+import { KPIDate, KPITwitterFollower, KPIWeeklyPV, KPIWeeklyBounceRate, KPIBookmarks, KPISubscribers, KPIStars, KPIList } from './domain/KPIList';
 
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
@@ -78,29 +78,23 @@ function main() {
 
   const kpiList = new KPIList();
   kpiList.add(new KPIDate(today));
-  console.log(kpiList);
-  console.log(kpiList.getSpreadSheetArray());
-  // TODO: この辺をいい感じに追記していく
+  kpiList.add(new KPITwitterFollower(followers.toString()));
+  kpiList.add(new KPIWeeklyPV(pv.toString()));
+  kpiList.add(new KPIWeeklyBounceRate(bounceRate.toString()));
+  kpiList.add(new KPIBookmarks(bookmarks.toString()));
+  kpiList.add(new KPISubscribers(numOfSubscribers.toString()));
+  kpiList.add(new KPIStars(stars.toString()));
 
   // スプレッドシートに追記する
-  const appendData: Array<any> = [
-    today,
-    followers,
-    pv,
-    bounceRate,
-    bookmarks,
-    numOfSubscribers,
-    stars
-  ];
-  console.log(appendData);
-  sheet.appendRow(appendData);
+  console.log(kpiList.getSpreadSheetArray());
+  sheet.appendRow(kpiList.getSpreadSheetArray());
 
   // Slackへの通知を行う。 
   const slackUrl = PropertiesService.getScriptProperties().getProperty(
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slackNotification(slackUrl, appendData);
+    slackNotification(slackUrl, kpiList);
   } else {
     console.log('Slack通知URLは取得しませんでした');
   }
