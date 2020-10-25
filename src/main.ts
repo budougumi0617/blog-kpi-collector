@@ -1,4 +1,4 @@
-import { KPIDate, KPITwitterFollower, KPIWeeklyPV, KPIWeeklyBounceRate, KPIBookmarks, KPISubscribers, KPIStars, KPIList } from './domain/KPIList';
+import { KPI, KPIList } from './domain/KPIList';
 
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
@@ -77,13 +77,13 @@ function main() {
   }
 
   const kpiList = new KPIList();
-  kpiList.add(new KPIDate(today));
-  kpiList.add(new KPITwitterFollower(followers.toString()));
-  kpiList.add(new KPIWeeklyPV(pv.toString()));
-  kpiList.add(new KPIWeeklyBounceRate(bounceRate.toString()));
-  kpiList.add(new KPIBookmarks(bookmarks.toString()));
-  kpiList.add(new KPISubscribers(numOfSubscribers.toString()));
-  kpiList.add(new KPIStars(stars.toString()));
+  kpiList.add(KPI.Factory.date(today));
+  kpiList.add(KPI.Factory.twitterFollower(followers.toString()));
+  kpiList.add(KPI.Factory.weeklyPV(pv.toString()));
+  kpiList.add(KPI.Factory.weeklyBounceRate(bounceRate.toString()));
+  kpiList.add(KPI.Factory.bookmarks(bookmarks.toString()));
+  kpiList.add(KPI.Factory.subscribers(numOfSubscribers.toString()));
+  kpiList.add(KPI.Factory.stars(stars.toString()));
 
   // スプレッドシートに追記する
   console.log(kpiList.getSpreadSheetArray());

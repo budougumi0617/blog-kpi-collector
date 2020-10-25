@@ -18,13 +18,56 @@ export class KPIList {
   }
 }
 
-class KPI {
+interface iKPI {
+  /**
+   * valueを取得する。
+   */
+  getValue(): string;
+  /**
+   * Slackに通知するためのFieldsを返却する。
+   * anyではなく、ガッチリ定義してもよいが、そのためにライブラリを追加したり定義するのは大変なので、anyで見送る。
+   */
+  toSlackFields(): any;
+}
+
+export class KPI implements iKPI {
   constructor(
     private description: string,
     private value: string
   ) { }
 
-  public getValue() {
+  public static Factory = class {
+    public static date(value: string): KPI {
+      return new KPI("Date", value);
+    }
+
+    public static twitterFollower(value: string): KPI {
+      return new KPI("Twitter Follower", value);
+    }
+
+    public static weeklyPV(value: string): KPI {
+      return new KPI("WeeklyPV", value);
+    }
+
+    public static weeklyBounceRate(value: string): KPI {
+      return new KPI("Weekly Bounce Rate", value);
+    }
+
+    public static bookmarks(value: string): KPI {
+      return new KPI("Bookmarks", value);
+    }
+
+    public static subscribers(value: string): KPI {
+      return new KPI("Subscribers", value);
+    }
+
+    public static stars(value: string): KPI {
+      return new KPI("Stars", value);
+    }
+  }
+
+
+  public getValue(): string {
     return this.value;
   }
 
@@ -37,58 +80,3 @@ class KPI {
   }
 }
 
-export class KPIDate extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Date", value);
-  }
-}
-
-export class KPITwitterFollower extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Twitter Follower", value);
-  }
-}
-
-export class KPIWeeklyPV extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("WeeklyPV", value);
-  }
-}
-
-export class KPIWeeklyBounceRate extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Weekly Bounce Rate", value);
-  }
-}
-
-export class KPIBookmarks extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Bookmarks", value);
-  }
-}
-
-export class KPISubscribers extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Subscribers", value);
-  }
-}
-
-export class KPIStars extends KPI {
-  constructor(
-    value: string
-  ) {
-    super("Stars", value);
-  }
-}
