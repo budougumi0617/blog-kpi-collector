@@ -1,3 +1,5 @@
+import { KPIDate, KPIList } from './domain/KPIList';
+
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
@@ -73,6 +75,12 @@ function main() {
   } else {
     console.log("読者数・スター数は取得しませんでした");
   }
+
+  const kpiList = new KPIList();
+  kpiList.add(new KPIDate(today));
+  console.log(kpiList);
+  console.log(kpiList.getSpreadSheetArray());
+  // TODO: この辺をいい感じに追記していく
 
   // スプレッドシートに追記する
   const appendData: Array<any> = [
