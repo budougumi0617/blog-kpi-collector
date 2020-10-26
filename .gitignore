@@ -69,3 +69,5 @@ src/appsscript.json
 src/*.js
 
 creds.json
+
+.vscode/
