@@ -1,4 +1,6 @@
-function slackNotification(slackUrl: string, value: Array<any>) {
+import { KPIList } from "./domain/KPIList";
+
+function slackNotification(slackUrl: string, value: KPIList) {
   const options: any = {
     'method': 'post',
     'headers': { 'Content-type': 'application/x-www-form-urlencoded' },
@@ -9,43 +11,7 @@ function slackNotification(slackUrl: string, value: Array<any>) {
           'color': '#36a64f',
           'title': '今週のブログKPIを取得しました！',
           'title_link': 'https://docs.google.com/spreadsheets/d/' + SpreadsheetApp.getActiveSpreadsheet().getId(),
-          "fields": [
-            {
-              "title": "Date",
-              "value": value[0],
-              "short": "true"
-            },
-            {
-              "title": "Twitter Follower",
-              "value": value[1],
-              "short": "true"
-            },
-            {
-              "title": "WeeklyPV",
-              "value": value[2],
-              "short": "true"
-            },
-            {
-              "title": "Weekly Bounce Rate",
-              "value": value[3],
-              "short": "true"
-            },
-            {
-              "title": "Bookmarks",
-              "value": value[4],
-              "short": "true"
-            },
-            {
-              "title": "Subscribers",
-              "value": value[5],
-              "short": "true"
-            },
-            {
-              "title": "Stars",
-              "value": value[6],
-              "short": "true"
-            }
-          ]
+          "fields": value.getSlackArray(),
         }
       ]
     })

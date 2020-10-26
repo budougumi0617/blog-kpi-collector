@@ -1,3 +1,5 @@
+import { KPI, KPIList } from './domain/KPIList';
+
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
@@ -74,25 +76,25 @@ function main() {
     console.log("読者数・スター数は取得しませんでした");
   }
 
+  const kpiList = new KPIList();
+  kpiList.add(KPI.Factory.date(today));
+  kpiList.add(KPI.Factory.twitterFollower(followers.toString()));
+  kpiList.add(KPI.Factory.weeklyPV(pv.toString()));
+  kpiList.add(KPI.Factory.weeklyBounceRate(bounceRate.toString()));
+  kpiList.add(KPI.Factory.bookmarks(bookmarks.toString()));
+  kpiList.add(KPI.Factory.subscribers(numOfSubscribers.toString()));
+  kpiList.add(KPI.Factory.stars(stars.toString()));
+
   // スプレッドシートに追記する
-  const appendData: Array<any> = [
-    today,
-    followers,
-    pv,
-    bounceRate,
-    bookmarks,
-    numOfSubscribers,
-    stars
-  ];
-  console.log(appendData);
-  sheet.appendRow(appendData);
+  console.log(kpiList.getSpreadSheetArray());
+  sheet.appendRow(kpiList.getSpreadSheetArray());
 
   // Slackへの通知を行う。 
   const slackUrl = PropertiesService.getScriptProperties().getProperty(
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slackNotification(slackUrl, appendData);
+    slackNotification(slackUrl, kpiList);
   } else {
     console.log('Slack通知URLは取得しませんでした');
   }
