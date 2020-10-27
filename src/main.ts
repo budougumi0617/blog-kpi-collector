@@ -1,4 +1,5 @@
-import { KPI, KPIList } from './domain/KPIList';
+import { KPI, KPIList } from "./domain/KPIList";
+import { slackNotification } from "./slack";
 
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
@@ -89,13 +90,13 @@ function main() {
   console.log(kpiList.getSpreadSheetArray());
   sheet.appendRow(kpiList.getSpreadSheetArray());
 
-  // Slackへの通知を行う。 
+  // Slackへの通知を行う。
   const slackUrl = PropertiesService.getScriptProperties().getProperty(
     "SLACK_URL"
   );
   if (slackUrl != null) {
     slackNotification(slackUrl, kpiList);
   } else {
-    console.log('Slack通知URLは取得しませんでした');
+    console.log("Slack通知URLは取得しませんでした");
   }
 }
