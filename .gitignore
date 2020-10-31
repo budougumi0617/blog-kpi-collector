@@ -71,3 +71,4 @@ src/*.js
 creds.json
 
 .vscode/
+dist/
