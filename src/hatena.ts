@@ -1,10 +1,14 @@
 export function getBookmarkCount(target: string): number {
   // https://b.hatena.ne.jp/help/entry/bcounter
   const url = `https://b.hatena.ne.jp/bc/${target}`;
-  const ops = { followRedirects: false };
+  const ops: URLFetchRequestOptions = { followRedirects: false };
   const response = UrlFetchApp.fetch(url, ops);
-  const hs = response.getAllHeaders();
-  const buf = hs["Location"].replace(".gif", "");
+
+  interface LocationObject {
+    Location: string
+  }
+  const hs= response.getAllHeaders() as LocationObject;
+  const buf:string = hs["Location"].replace(".gif", "");
   const result = buf.slice(buf.lastIndexOf("/") + 1);
   return parseInt(result, 10);
 }
