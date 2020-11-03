@@ -16,7 +16,7 @@ export function getTwitterFollowers(accoutName: string): number {
   );
   // curlで取得したHTMLの中から文字列を取得。その文字列をChrome Dev toolsでこねこねして考えた正規表現。
   const counts = html.match(
-    /\/followers\">[<>\w\s=/"]*statnum\">([\d,]+)<\/div>/
+    /\/followers">[<>\w\s=/"]*statnum">([\d,]+)<\/div>/
   );
   if (counts === null) {
     Logger.log("cannot parse twitter follower");
