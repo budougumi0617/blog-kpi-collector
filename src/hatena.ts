@@ -27,7 +27,7 @@ export function getNumOfSubscribers(target: string): number {
   return numOfSubscribers;
 }
 
-export function getStarCount(target: string): string {
+export function getStarCount(target: string): number {
   // http://developer.hatena.ne.jp/ja/documents/star/apis/count
   // '/'終わりでないURLの場合404エラーとなってしまうのを避ける
   // String.prototype.endsWith()が利用できないのでsubstringで実装
