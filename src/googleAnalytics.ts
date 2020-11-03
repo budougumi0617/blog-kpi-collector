@@ -1,9 +1,9 @@
-export function getAnalyticsData(viewID: string): number[] {
+export function getAnalyticsData(viewID: string): string[] {
   const startDate = "7daysAgo";
   const endDate = "yesterday";
   const metrics = "ga:pageviews,ga:bounceRate";
 
-  const resp = Analytics.Data.Ga.get(viewID, startDate, endDate, metrics);
+  const resp = Analytics?.Data?.Ga?.get(viewID, startDate, endDate, metrics);
   // return [pv, bounceRate]
-  return resp.getRows()[0];
+  return resp ? (resp.rows ? resp.rows[0] : ["0", "0"]) : ["0", "0"]; // FIXME: これはアカン
 }
