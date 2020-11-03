@@ -1,8 +1,9 @@
 import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
+import HttpHeaders = GoogleAppsScript.URL_Fetch.HttpHeaders;
 
-function getTwitterFollowers(accoutName: string): number {
-  const url: string = `https://mobile.twitter.com/${accoutName}`;
-  const postheader: Object = {
+export function getTwitterFollowers(accoutName: string): number {
+  const url = `https://mobile.twitter.com/${accoutName}`;
+  const postheader: HttpHeaders = {
     timeout: "50000",
   };
   const parameters: URLFetchRequestOptions = {

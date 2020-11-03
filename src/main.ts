@@ -2,6 +2,7 @@ import { KPI, KPIList } from "./domain/KPIList";
 import { slackNotification } from "./slack";
 import { getAnalyticsData } from "./googleAnalytics";
 import { getNumOfSubscribers, getBookmarkCount, getStarCount } from "./hatena";
+import { getTwitterFollowers } from "./twitter";
 
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数

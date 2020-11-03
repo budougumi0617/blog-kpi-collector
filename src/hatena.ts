@@ -1,3 +1,5 @@
+import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
+
 export function getBookmarkCount(target: string): number {
   // https://b.hatena.ne.jp/help/entry/bcounter
   const url = `https://b.hatena.ne.jp/bc/${target}`;
