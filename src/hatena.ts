@@ -5,21 +5,21 @@ export function getBookmarkCount(target: string): number {
   const response = UrlFetchApp.fetch(url, ops);
 
   interface LocationObject {
-    Location: string
+    Location: string;
   }
-  const hs= response.getAllHeaders() as LocationObject;
-  const buf:string = hs["Location"].replace(".gif", "");
+  const hs = response.getAllHeaders() as LocationObject;
+  const buf: string = hs["Location"].replace(".gif", "");
   const result = buf.slice(buf.lastIndexOf("/") + 1);
   return parseInt(result, 10);
 }
 
-export function getNumOfSubscribers(target: string): string {
+export function getNumOfSubscribers(target: string): number {
   const url = `https://blog.hatena.ne.jp/api/init?blog=${target}`;
   const headers = { "X-Requested-With": "XMLHttpRequest" };
   const options: URLFetchRequestOptions = {
     method: "get",
     headers: headers,
-    followRedirects: false
+    followRedirects: false,
   };
   const response = UrlFetchApp.fetch(url, options).getContentText("UTF-8");
   const parsedResponse = JSON.parse(response);
