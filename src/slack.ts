@@ -1,7 +1,9 @@
+import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
+
 import { KPIList } from "./domain/KPIList";
 
-export function slackNotification(slackUrl: string, value: KPIList) {
-  const options: any = {
+export function slackNotification(slackUrl: string, value: KPIList): void {
+  const options: URLFetchRequestOptions = {
     method: "post",
     headers: { "Content-type": "application/x-www-form-urlencoded" },
     payload: JSON.stringify({
