@@ -5,5 +5,5 @@ export function getAnalyticsData(viewID: string): string[] {
 
   const resp = Analytics?.Data?.Ga?.get(viewID, startDate, endDate, metrics);
   // return [pv, bounceRate]
-  return resp ? (resp.rows ? resp.rows[0] : ["0", "0"]) : ["0", "0"]; // FIXME: これはアカン
+  return resp?.rows ? resp.rows[0] : ["0", "0"];
 }
