@@ -10,7 +10,9 @@ function getTwitterFollowers(accoutName: string): number {
     method: "get",
     muteHttpExceptions: true,
   };
-  let html: string = UrlFetchApp.fetch(url, parameters).getContentText("UTF-8");
+  const html: string = UrlFetchApp.fetch(url, parameters).getContentText(
+    "UTF-8"
+  );
   // curlで取得したHTMLの中から文字列を取得。その文字列をChrome Dev toolsでこねこねして考えた正規表現。
   const counts = html.match(
     /\/followers\">[<>\w\s=/"]*statnum\">([\d,]+)<\/div>/
