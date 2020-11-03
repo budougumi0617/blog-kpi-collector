@@ -47,8 +47,8 @@ function main() {
   let bounceRate = -1;
   if (viewID != null) {
     const gaResults = getAnalyticsData(viewID);
-    pv = gaResults[0];
-    bounceRate = gaResults[1];
+    pv = Number(gaResults[0]);
+    bounceRate = Number(gaResults[1]);
   } else {
     console.log("GoogleAnalytics情報は取得しませんでした");
   }
@@ -90,7 +90,7 @@ function main() {
 
   // スプレッドシートに追記する
   console.log(kpiList.getSpreadSheetArray());
-  sheet.appendRow(kpiList.getSpreadSheetArray());
+  sheet?.appendRow(kpiList.getSpreadSheetArray());
 
   // Slackへの通知を行う。
   const slackUrl = PropertiesService.getScriptProperties().getProperty(
