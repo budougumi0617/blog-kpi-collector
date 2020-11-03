@@ -1,4 +1,4 @@
-function getBookmarkCount(target) {
+export function getBookmarkCount(target: string): number {
   // https://b.hatena.ne.jp/help/entry/bcounter
   const url = `https://b.hatena.ne.jp/bc/${target}`;
   const ops = { followRedirects: false };
@@ -9,7 +9,7 @@ function getBookmarkCount(target) {
   return parseInt(result, 10);
 }
 
-function getNumOfSubscribers(target) {
+export function getNumOfSubscribers(target: string): string {
   const url = `https://blog.hatena.ne.jp/api/init?blog=${target}`;
   const headers = { "X-Requested-With": "XMLHttpRequest" };
   const options: URLFetchRequestOptions = {
@@ -23,7 +23,7 @@ function getNumOfSubscribers(target) {
   return numOfSubscribers;
 }
 
-function getStarCount(target) {
+export function getStarCount(target: string): string {
   // http://developer.hatena.ne.jp/ja/documents/star/apis/count
   // '/'終わりでないURLの場合404エラーとなってしまうのを避ける
   // String.prototype.endsWith()が利用できないのでsubstringで実装

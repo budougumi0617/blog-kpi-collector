@@ -1,4 +1,4 @@
-function getAnalyticsData(viewID) {
+export function getAnalyticsData(viewID: string): string {
   const startDate = "7daysAgo";
   const endDate = "yesterday";
   const metrics = "ga:pageviews,ga:bounceRate";
