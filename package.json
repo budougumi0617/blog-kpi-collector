@@ -6,7 +6,6 @@
   "dependencies": {
     "@google/clasp": "^2.3.0",
     "@types/google-apps-script": "1.0.17",
-    "@types/google.analytics": "0.0.39",
     "@types/node": "^10.17.42",
     "fix": "0.0.6"
   },
