@@ -12,8 +12,8 @@ function getBookmarkCount(target) {
 function getNumOfSubscribers(target) {
   const url = `https://blog.hatena.ne.jp/api/init?blog=${target}`;
   const headers = { "X-Requested-With": "XMLHttpRequest" };
-  const options = {
-    method: "GET",
+  const options: URLFetchRequestOptions = {
+    method: "get",
     headers: headers,
     followRedirects: false
   };
