@@ -1,5 +1,3 @@
-import { getAnalyticsData } from "./googleAnalytics";
-
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
@@ -94,7 +92,7 @@ function main() {
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slack.slackNotification(slackUrl, kpiList);
+    slackClient.slackNotification(slackUrl, kpiList);
   } else {
     console.log("Slack通知URLは取得しませんでした");
   }

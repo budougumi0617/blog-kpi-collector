@@ -1,4 +1,4 @@
-namespace slack {
+namespace slackClient {
   import URLFetchRequestOptions = GoogleAppsScript.URL_Fetch.URLFetchRequestOptions;
   export function slackNotification(
     slackUrl: string,
