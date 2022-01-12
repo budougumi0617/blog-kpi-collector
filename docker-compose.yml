@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  clasp:
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/usr/src/app
