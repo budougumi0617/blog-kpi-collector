@@ -43,7 +43,7 @@ function main() {
   let pv = -1;
   let bounceRate = -1;
   if (viewID != null) {
-    const gaResults = getAnalyticsData(viewID);
+    const gaResults = googleAnalytics.getAnalyticsData(viewID);
     pv = Number(gaResults[0]);
     bounceRate = Number(gaResults[1]);
   } else {
@@ -58,7 +58,7 @@ function main() {
     "BLOG_URL"
   );
   if (blogUrl != null) {
-    bookmarks = getBookmarkCount(blogUrl);
+    bookmarks = hatena.getBookmarkCount(blogUrl);
   } else {
     console.log("はてなブックマーク数は取得しませんでした");
   }
@@ -76,7 +76,7 @@ function main() {
     console.log("読者数・スター数は取得しませんでした");
   }
 
-  const kpiList = new KPIList();
+  const kpiList = new domain.KPIList();
   kpiList.add(domain.KPI.Factory.date(today));
   kpiList.add(domain.KPI.Factory.twitterFollower(followers.toString()));
   kpiList.add(domain.KPI.Factory.weeklyPV(pv.toString()));
