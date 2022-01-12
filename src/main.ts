@@ -1,8 +1,4 @@
-import { KPI, KPIList } from "./domain/KPIList";
-import { slackNotification } from "./slack";
 import { getAnalyticsData } from "./googleAnalytics";
-import { getNumOfSubscribers, getBookmarkCount, getStarCount } from "./hatena";
-import { getTwitterFollowers } from "./twitter";
 
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
@@ -29,7 +25,7 @@ function main() {
     "TWITTER_NAME"
   );
   if (twitterName != null) {
-    followers = getTwitterFollowers(twitterName);
+    followers = twitter.getTwitterFollowers(twitterName);
   } else {
     console.log("Twitter情報は取得しませんでした");
   }
@@ -74,20 +70,20 @@ function main() {
     "HATENA_BLOG"
   );
   if (hatenaBlog === "true" && blogUrl != null) {
-    numOfSubscribers = getNumOfSubscribers(blogUrl);
-    stars = getStarCount(blogUrl);
+    numOfSubscribers = hatena.getNumOfSubscribers(blogUrl);
+    stars = hatena.getStarCount(blogUrl);
   } else {
     console.log("読者数・スター数は取得しませんでした");
   }
 
   const kpiList = new KPIList();
-  kpiList.add(KPI.Factory.date(today));
-  kpiList.add(KPI.Factory.twitterFollower(followers.toString()));
-  kpiList.add(KPI.Factory.weeklyPV(pv.toString()));
-  kpiList.add(KPI.Factory.weeklyBounceRate(bounceRate.toString()));
-  kpiList.add(KPI.Factory.bookmarks(bookmarks.toString()));
-  kpiList.add(KPI.Factory.subscribers(numOfSubscribers.toString()));
-  kpiList.add(KPI.Factory.stars(stars.toString()));
+  kpiList.add(domain.KPI.Factory.date(today));
+  kpiList.add(domain.KPI.Factory.twitterFollower(followers.toString()));
+  kpiList.add(domain.KPI.Factory.weeklyPV(pv.toString()));
+  kpiList.add(domain.KPI.Factory.weeklyBounceRate(bounceRate.toString()));
+  kpiList.add(domain.KPI.Factory.bookmarks(bookmarks.toString()));
+  kpiList.add(domain.KPI.Factory.subscribers(numOfSubscribers.toString()));
+  kpiList.add(domain.KPI.Factory.stars(stars.toString()));
 
   // スプレッドシートに追記する
   console.log(kpiList.getSpreadSheetArray());
@@ -98,8 +94,10 @@ function main() {
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slackNotification(slackUrl, kpiList);
+    slack.slackNotification(slackUrl, kpiList);
   } else {
     console.log("Slack通知URLは取得しませんでした");
   }
 }
+
+main();
