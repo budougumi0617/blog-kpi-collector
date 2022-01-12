@@ -1,9 +1,3 @@
-import { KPI, KPIList } from "./domain/KPIList";
-import { slackNotification } from "./slack";
-import { getAnalyticsData } from "./googleAnalytics";
-import { getNumOfSubscribers, getBookmarkCount, getStarCount } from "./hatena";
-import { getTwitterFollowers } from "./twitter";
-
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
@@ -29,7 +23,7 @@ function main() {
     "TWITTER_NAME"
   );
   if (twitterName != null) {
-    followers = getTwitterFollowers(twitterName);
+    followers = Twitter.getTwitterFollowers(twitterName);
   } else {
     console.log("Twitter情報は取得しませんでした");
   }
@@ -47,7 +41,7 @@ function main() {
   let pv = -1;
   let bounceRate = -1;
   if (viewID != null) {
-    const gaResults = getAnalyticsData(viewID);
+    const gaResults = GoogleAnalytics.getAnalyticsData(viewID);
     pv = Number(gaResults[0]);
     bounceRate = Number(gaResults[1]);
   } else {
@@ -62,7 +56,7 @@ function main() {
     "BLOG_URL"
   );
   if (blogUrl != null) {
-    bookmarks = getBookmarkCount(blogUrl);
+    bookmarks = Hatena.getBookmarkCount(blogUrl);
   } else {
     console.log("はてなブックマーク数は取得しませんでした");
   }
@@ -74,20 +68,20 @@ function main() {
     "HATENA_BLOG"
   );
   if (hatenaBlog === "true" && blogUrl != null) {
-    numOfSubscribers = getNumOfSubscribers(blogUrl);
-    stars = getStarCount(blogUrl);
+    numOfSubscribers = Hatena.getNumOfSubscribers(blogUrl);
+    stars = Hatena.getStarCount(blogUrl);
   } else {
     console.log("読者数・スター数は取得しませんでした");
   }
 
-  const kpiList = new KPIList();
-  kpiList.add(KPI.Factory.date(today));
-  kpiList.add(KPI.Factory.twitterFollower(followers.toString()));
-  kpiList.add(KPI.Factory.weeklyPV(pv.toString()));
-  kpiList.add(KPI.Factory.weeklyBounceRate(bounceRate.toString()));
-  kpiList.add(KPI.Factory.bookmarks(bookmarks.toString()));
-  kpiList.add(KPI.Factory.subscribers(numOfSubscribers.toString()));
-  kpiList.add(KPI.Factory.stars(stars.toString()));
+  const kpiList = new Domain.KPIList();
+  kpiList.add(Domain.KPI.Factory.date(today));
+  kpiList.add(Domain.KPI.Factory.twitterFollower(followers.toString()));
+  kpiList.add(Domain.KPI.Factory.weeklyPV(pv.toString()));
+  kpiList.add(Domain.KPI.Factory.weeklyBounceRate(bounceRate.toString()));
+  kpiList.add(Domain.KPI.Factory.bookmarks(bookmarks.toString()));
+  kpiList.add(Domain.KPI.Factory.subscribers(numOfSubscribers.toString()));
+  kpiList.add(Domain.KPI.Factory.stars(stars.toString()));
 
   // スプレッドシートに追記する
   console.log(kpiList.getSpreadSheetArray());
@@ -98,7 +92,7 @@ function main() {
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slackNotification(slackUrl, kpiList);
+    Slack.slackNotification(slackUrl, kpiList);
   } else {
     console.log("Slack通知URLは取得しませんでした");
   }
