@@ -15,7 +15,8 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "ignorePatterns": ["src/*.js"],
     "rules": {
-        "@typescript-eslint/no-namespace": ["error", { "allowDeclarations": true }]
+        "@typescript-eslint/no-namespace": ["off", { "allowDeclarations": true }]
     }
 }
