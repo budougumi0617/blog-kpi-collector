@@ -1,12 +1,9 @@
-import { KPI, KPIList } from "./domain/KPIList";
-import { slackNotification } from "./slack";
-import { getAnalyticsData } from "./googleAnalytics";
-import { getNumOfSubscribers, getBookmarkCount, getStarCount } from "./hatena";
-import { getTwitterFollowers } from "./twitter";
-
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
+//
+// claspではimport/exportが利用できないため、外部ファイルの関数定義はnamespaceを利用して利用して参照している。
+// ref: https://github.com/google/clasp/blob/e851215b8abe4de282c62c4d61076c85e89a56ba/docs/typescript.md
 function main() {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   // "SHEET_NAME"にはDrive上に作成したスプレットシートのシート名を入力しておくこと。
@@ -29,7 +26,7 @@ function main() {
     "TWITTER_NAME"
   );
   if (twitterName != null) {
-    followers = getTwitterFollowers(twitterName);
+    followers = twitter.getTwitterFollowers(twitterName);
   } else {
     console.log("Twitter情報は取得しませんでした");
   }
@@ -47,7 +44,7 @@ function main() {
   let pv = -1;
   let bounceRate = -1;
   if (viewID != null) {
-    const gaResults = getAnalyticsData(viewID);
+    const gaResults = googleAnalytics.getAnalyticsData(viewID);
     pv = Number(gaResults[0]);
     bounceRate = Number(gaResults[1]);
   } else {
@@ -62,7 +59,7 @@ function main() {
     "BLOG_URL"
   );
   if (blogUrl != null) {
-    bookmarks = getBookmarkCount(blogUrl);
+    bookmarks = hatena.getBookmarkCount(blogUrl);
   } else {
     console.log("はてなブックマーク数は取得しませんでした");
   }
@@ -74,20 +71,20 @@ function main() {
     "HATENA_BLOG"
   );
   if (hatenaBlog === "true" && blogUrl != null) {
-    numOfSubscribers = getNumOfSubscribers(blogUrl);
-    stars = getStarCount(blogUrl);
+    numOfSubscribers = hatena.getNumOfSubscribers(blogUrl);
+    stars = hatena.getStarCount(blogUrl);
   } else {
     console.log("読者数・スター数は取得しませんでした");
   }
 
-  const kpiList = new KPIList();
-  kpiList.add(KPI.Factory.date(today));
-  kpiList.add(KPI.Factory.twitterFollower(followers.toString()));
-  kpiList.add(KPI.Factory.weeklyPV(pv.toString()));
-  kpiList.add(KPI.Factory.weeklyBounceRate(bounceRate.toString()));
-  kpiList.add(KPI.Factory.bookmarks(bookmarks.toString()));
-  kpiList.add(KPI.Factory.subscribers(numOfSubscribers.toString()));
-  kpiList.add(KPI.Factory.stars(stars.toString()));
+  const kpiList = new domain.KPIList();
+  kpiList.add(domain.KPI.Factory.date(today));
+  kpiList.add(domain.KPI.Factory.twitterFollower(followers.toString()));
+  kpiList.add(domain.KPI.Factory.weeklyPV(pv.toString()));
+  kpiList.add(domain.KPI.Factory.weeklyBounceRate(bounceRate.toString()));
+  kpiList.add(domain.KPI.Factory.bookmarks(bookmarks.toString()));
+  kpiList.add(domain.KPI.Factory.subscribers(numOfSubscribers.toString()));
+  kpiList.add(domain.KPI.Factory.stars(stars.toString()));
 
   // スプレッドシートに追記する
   console.log(kpiList.getSpreadSheetArray());
@@ -102,4 +99,26 @@ function main() {
   } else {
     console.log("Slack通知URLは取得しませんでした");
   }
+}
+
+// FIXME: なぜかslack.tsだけclasp上で RefferenceError: slackClient is not definedとなってmaint.tsから見えないので直接記述している。
+function slackNotification(slackUrl: string, value: domain.KPIList): void {
+  const options: URLFetchRequestOptions = {
+    method: "post",
+    headers: { "Content-type": "application/x-www-form-urlencoded" },
+    payload: JSON.stringify({
+      attachments: [
+        {
+          fallback: "今週のブログKPIを取得しました！",
+          color: "#36a64f",
+          title: "今週のブログKPIを取得しました！",
+          title_link:
+            "https://docs.google.com/spreadsheets/d/" +
+            SpreadsheetApp.getActiveSpreadsheet().getId(),
+          fields: value.getSlackArray(),
+        },
+      ],
+    }),
+  };
+  UrlFetchApp.fetch(slackUrl, options);
 }

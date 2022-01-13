@@ -10,12 +10,15 @@ Googleスプレットシートで定期的にブログの情報を集計する�
 後述するトリガーを設定しておくことで定期的にデータを集計できます。 
 
 ```
-Twitter | フォロワー数
+~Twitter~ | ~フォロワー数~
 Google Analytics | 前日までの週間PV数、 前日までの週間直帰率
 はてなブックマーク | はてなブックマーク総数
 はてなブログ | はてなブログ読者総数
 はてなスター | はてなスター総数
 ```
+
+2022年1月現在、twitterのフォロワー数は取得できません。  
+https://github.com/budougumi0617/blog-kpi-collector/issues/18
 
 # 使い方
 # 初期設定
@@ -41,6 +44,7 @@ Created new Google Sheet: https://drive.google.com/open?id=....
 Created new Google Sheets Add-on script: https://script.google.com/d/..../edit
 Cloned 1 file.
 └─ ./src/appsscript.json
+$ mv ./src/.clasp.json ./.clasp.json
 ```
 
 出力されたAdd-on scriptとSpread SheetのURLをメモしておきます。その後、一度`clasp pull`して連携したあと、`clasp push`コマンドでコードをDriveに送ります。
@@ -95,6 +99,11 @@ Web上でAdd-on script（Apps Scriptプロジェクト）を開いたあと、�
 
 
 ## スクリプトのプロパティの設定方法
+2022年1月現在、下記手順は「旧エディタ」でないとできません。  
+添付画像とエディタの外見が異なる場合は「以前のエディタを使用」をクリックして旧エディタを開きます。
+
+https://8bees.net/gas%e3%81%ae%e3%83%97%e3%83%ad%e3%83%91%e3%83%86%e3%82%a3%e8%a8%ad%e5%ae%9a
+
 1. このリポジトリで作成したApps Scriptのプロジェクトを開く
   - https://script.google.com/u/1/home
 2. メニューの中の「ファイル」→「プロジェクトのプロパティ」をクリックする

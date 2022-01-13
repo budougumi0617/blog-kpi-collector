@@ -67,6 +67,7 @@ typings/
 .clasprc.json
 src/appsscript.json
 src/*.js
+src/domain/*.js
 
 creds.json
 
