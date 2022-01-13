@@ -1,6 +1,9 @@
 // main
 // 紐付けられたスプレットシートにKPIを記録していく関数
 // 使い方はREADME参照のこと
+//
+// claspではimport/exportが利用できないため、外部ファイルの関数定義はnamespaceを利用して利用して参照している。
+// ref: https://github.com/google/clasp/blob/e851215b8abe4de282c62c4d61076c85e89a56ba/docs/typescript.md
 function main() {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   // "SHEET_NAME"にはDrive上に作成したスプレットシートのシート名を入力しておくこと。
