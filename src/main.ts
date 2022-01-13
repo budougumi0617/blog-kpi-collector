@@ -95,10 +95,30 @@ function main() {
     "SLACK_URL"
   );
   if (slackUrl != null) {
-    slackClient.slackNotification(slackUrl, kpiList);
+    slackNotification(slackUrl, kpiList);
   } else {
     console.log("Slack通知URLは取得しませんでした");
   }
 }
 
-main();
+// FIXME: なぜかslack.tsだけclasp上で RefferenceError: slackClient is not definedとなってmaint.tsから見えないので直接記述している。
+function slackNotification(slackUrl: string, value: domain.KPIList): void {
+  const options: URLFetchRequestOptions = {
+    method: "post",
+    headers: { "Content-type": "application/x-www-form-urlencoded" },
+    payload: JSON.stringify({
+      attachments: [
+        {
+          fallback: "今週のブログKPIを取得しました！",
+          color: "#36a64f",
+          title: "今週のブログKPIを取得しました！",
+          title_link:
+            "https://docs.google.com/spreadsheets/d/" +
+            SpreadsheetApp.getActiveSpreadsheet().getId(),
+          fields: value.getSlackArray(),
+        },
+      ],
+    }),
+  };
+  UrlFetchApp.fetch(slackUrl, options);
+}
