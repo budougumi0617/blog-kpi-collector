@@ -1,38 +1,39 @@
 /**
  * 個別のプロパティを取得および設定するためのモジュール.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 namespace CustomProperties {
   /**
    * 集計したいシート名
    * 例：シート1
    */
-  const SHEET_NAME: string = "";
+  const SHEET_NAME = "";
   /**
    * TwitterID
    * 例： budougumi0617
    */
-  const TWITTER_NAME: string = "";
+  const TWITTER_NAME = "";
   /**
    * GAのID.
    * 例：ga:000000000
    */
-  const VIEW_ID: string = "";
+  const VIEW_ID = "";
   /**
    * ブログのURL.
    * 例：https://budougumi0617.github.io/
    */
-  const BLOG_URL: string = "";
+  const BLOG_URL = "";
   /**
    * trueにすると、集計したいブログのURLがはてなブログの場合。はてなブログ読者数とはてなスター数を取得する
    * 
    * 例：false
    */
-  const HATENA_BLOG: boolean = false;
+  const HATENA_BLOG = false;
   /**
    * SlackのIncommingHook
    * 例：https://hooks.slack.com/services/TAH1RHKEW/B01BXA1PYBC/JQ5aIRrqTnAAAAAAAAAAAAA
    */
-  const SLACK_URL: string = "";
+  const SLACK_URL = "";
 
   /**
    * "SHEET_NAME"にはDrive上に作成したスプレットシートのシート名を入力しておくこと。

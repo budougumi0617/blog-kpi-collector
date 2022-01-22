@@ -123,26 +123,13 @@ https://8bees.net/gas%e3%81%ae%e3%83%97%e3%83%ad%e3%83%91%e3%83%86%e3%82%a3%e8%a
   
 ```ts
 namespace CustomProperties {
-  const SHEET_NAME: string = "";
-  const TWITTER_NAME: string = "";
-  const VIEW_ID: string = "";
-  const BLOG_URL: string = "";
-  const HATENA_BLOG: boolean = false;
-  const SLACK_URL: string = "";
+  const SHEET_NAME = "";
+  const TWITTER_NAME = "";
+  const VIEW_ID = "";
+  const BLOG_URL = "";
+  const HATENA_BLOG = false;
+  const SLACK_URL = "";
 }
-```
-
-なお、こちらのプロパティ値を万が一にでもgitで管理したくないという場合は、次のコマンドを使用をオススメします。
-
-```bash
-# コミットしたくないファイルを無視する設定
-# https://qiita.com/usamik26/items/56d0d3ba7a1300625f92
-
-# コミット対象から外す
-git update-index --skip-worktree src/customProperties.ts
-
-# 外したファイルをコミット対象に含める
-# git update-index --no-skip-worktree src/customProperties.ts
 ```
 
 # Google Analyticsとの連携方法
