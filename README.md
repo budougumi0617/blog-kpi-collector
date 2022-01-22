@@ -112,6 +112,26 @@ https://8bees.net/gas%e3%81%ae%e3%83%97%e3%83%ad%e3%83%91%e3%83%86%e3%82%a3%e8%a
 4. 設定するプロパティの名前と値を入力していく
 ![スクリプトのプロパティ](./img/properties.png)
 
+### 直接プロパティを入力する場合
+
+スクリプトのプロパティが「旧エディタ」でないとできなくなっていますので、直接値を設定する方法を取る場合の設定箇所を記載します。
+  
+- 対象ファイル
+  - CustomProperties.ts
+
+次の定数（const）に「スクリプトのプロパティ」を設定してください。
+  
+```ts
+namespace CustomProperties {
+  const SHEET_NAME = "";
+  const TWITTER_NAME = "";
+  const VIEW_ID = "";
+  const BLOG_URL = "";
+  const HATENA_BLOG = false;
+  const SLACK_URL = "";
+}
+```
+
 # Google Analyticsとの連携方法
 Google Analyticsとの連携には`GA_VIEW_ID`の他にAnalytics APIを有効にする必要があります。
 

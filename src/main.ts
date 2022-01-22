@@ -9,12 +9,7 @@ function main() {
   // "SHEET_NAME"にはDrive上に作成したスプレットシートのシート名を入力しておくこと。
   // 未入力の場合はデフォルトの"シート1"に書き込まれる。
   // 例: シート1
-  let sheetName = PropertiesService.getScriptProperties().getProperty(
-    "SHEET_NAME"
-  );
-  if (sheetName == null || sheetName.length === 0) {
-    sheetName = "シート1";
-  }
+  const sheetName = CustomProperties.getSheetName();
   const sheet = spreadsheet.getSheetByName(sheetName);
 
   const today = Utilities.formatDate(new Date(), "JST", "yyyy/MM/dd");
@@ -22,9 +17,7 @@ function main() {
   // Twitterのフォロワー情報を取得する
   // TWITTER_NAMEにはアカウント名を入力しておくこと(@は不要)
   let followers = -1;
-  const twitterName = PropertiesService.getScriptProperties().getProperty(
-    "TWITTER_NAME"
-  );
+  const twitterName = CustomProperties.getTwitterName();
   if (twitterName != null) {
     followers = twitter.getTwitterFollowers(twitterName);
   } else {
@@ -38,9 +31,7 @@ function main() {
   //    - https://ga-dev-tools.appspot.com/query-explorer/#report-start
   // 2. Select Viewで集計したいデータを選択する
   // 3. Set the query parametersのidsに自動入力される"ga:000000000"というIDをGA_VIEW_IDとする
-  const viewID = PropertiesService.getScriptProperties().getProperty(
-    "GA_VIEW_ID"
-  );
+  const viewID = CustomProperties.getViewID();
   let pv = -1;
   let bounceRate = -1;
   if (viewID != null) {
@@ -55,9 +46,7 @@ function main() {
   // BLOG_URLには自分のサイトのURLを入力しておくこと。
   // 例: https://budougumi0617.github.io/
   let bookmarks = -1;
-  const blogUrl = PropertiesService.getScriptProperties().getProperty(
-    "BLOG_URL"
-  );
+  const blogUrl = CustomProperties.getBlogUrl();
   if (blogUrl != null) {
     bookmarks = hatena.getBookmarkCount(blogUrl);
   } else {
@@ -67,9 +56,7 @@ function main() {
   // 「HATENA_BLOGがtrue」だった場合、「指定した url のブログ」に対する読者数・スター数を取得する
   let numOfSubscribers = -1;
   let stars = -1;
-  const hatenaBlog = PropertiesService.getScriptProperties().getProperty(
-    "HATENA_BLOG"
-  );
+  const hatenaBlog = CustomProperties.getHatenaBlog();
   if (hatenaBlog === "true" && blogUrl != null) {
     numOfSubscribers = hatena.getNumOfSubscribers(blogUrl);
     stars = hatena.getStarCount(blogUrl);
@@ -91,9 +78,7 @@ function main() {
   sheet?.appendRow(kpiList.getSpreadSheetArray());
 
   // Slackへの通知を行う。
-  const slackUrl = PropertiesService.getScriptProperties().getProperty(
-    "SLACK_URL"
-  );
+  const slackUrl = CustomProperties.getSlackUrl();
   if (slackUrl != null) {
     slackNotification(slackUrl, kpiList);
   } else {
